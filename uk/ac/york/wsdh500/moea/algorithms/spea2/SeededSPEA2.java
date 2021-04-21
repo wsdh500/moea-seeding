@@ -5,11 +5,6 @@ import static uk.ac.york.wsdh500.moea.utils.SeedUtils.LOGARITHMIC ;
 import static uk.ac.york.wsdh500.moea.utils.SeedUtils.ORTHOGONAL ;
 import static uk.ac.york.wsdh500.moea.utils.SeedUtils.RANDOM ;
 import static uk.ac.york.wsdh500.moea.utils.SeedUtils.TWISTED ;
-import static uk.ac.york.wsdh500.moea.utils.SeedUtils.createLinearPopulation ;
-import static uk.ac.york.wsdh500.moea.utils.SeedUtils.createLogarithmicPopulation ;
-import static uk.ac.york.wsdh500.moea.utils.SeedUtils.createOrthogonalPopulation ;
-import static uk.ac.york.wsdh500.moea.utils.SeedUtils.createStochasticPopulation ;
-import static uk.ac.york.wsdh500.moea.utils.SeedUtils.createTwistedPopulation ;
 
 import java.util.List ;
 
@@ -20,6 +15,8 @@ import org.uma.jmetal.operator.selection.SelectionOperator ;
 import org.uma.jmetal.problem.Problem ;
 import org.uma.jmetal.solution.doublesolution.DoubleSolution ;
 import org.uma.jmetal.util.evaluator.SolutionListEvaluator ;
+
+import uk.ac.york.wsdh500.moea.utils.SeedUtils ;
 
 public class SeededSPEA2 extends SPEA2<DoubleSolution>
 {
@@ -71,7 +68,7 @@ public class SeededSPEA2 extends SPEA2<DoubleSolution>
 			name += " + twist" ;
 
 		if( ( SEED_TYPE & ORTHOGONAL ) == ORTHOGONAL )
-			name += " + orthogonal" ; ;
+			name += " + orthogonal" ;
 
 		return name ;
 	}
@@ -79,29 +76,6 @@ public class SeededSPEA2 extends SPEA2<DoubleSolution>
 	@Override
 	protected List<DoubleSolution> createInitialPopulation()
 	{
-		List<DoubleSolution> population = null ;
-
-		switch( SEED_TYPE )
-		{
-			case RANDOM :
-				population = createStochasticPopulation( getProblem() , getMaxPopulationSize() ) ;
-				break ;
-			case LINEAR :
-				population = createLinearPopulation( getProblem() , getMaxPopulationSize() ) ;
-				break ;
-			case LOGARITHMIC :
-				population = createLogarithmicPopulation( getProblem() , getMaxPopulationSize() ) ;
-				break ;
-			case TWISTED :
-				population = createTwistedPopulation( getProblem() , getMaxPopulationSize() ) ;
-				break ;
-			case ORTHOGONAL :
-				population = createOrthogonalPopulation( getProblem() , getMaxPopulationSize() ) ;
-				break ;
-			default :
-				throw new IllegalArgumentException( "Unknown seeding stratgey : " + SEED_TYPE ) ;
-		}
-
-		return population ;
+		return SeedUtils.createPopulation( getProblem() , getMaxPopulationSize() , SEED_TYPE ) ;
 	}
 }
