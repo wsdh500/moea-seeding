@@ -241,8 +241,24 @@ public class SeedUtils
 		if( max == min )
 			return w ;
 
-		if( min <= EPS )
+		if( min < 0 && max > 0 )
+		{
+			double range = Math.abs( max - min ) ;
+			int m = ( int )Math.round( ( -min * n ) / range ) ;
+			double[] u = linear_fill( m , min , -NEPS ) ;
+			for( int i = 0 ; i < m ; i++ )
+				w[ i ] = u[ i ] ;
+			double[] v = linear_fill( n - m , NEPS , max ) ;
+			for( int i = 0 ; i < v.length ; i++ )
+				w[ m + i ] = v[ i ] ;
+
+			return w ;
+		}
+
+		if( min >=0 && min <= EPS )
 			min = NEPS ;
+		else if( max >=0 && max <= EPS )
+			max = NEPS ;
 
 		double range = max - min ;
 		double step = range / n ;
