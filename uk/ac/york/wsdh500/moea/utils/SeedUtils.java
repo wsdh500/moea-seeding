@@ -8,15 +8,8 @@ import org.uma.jmetal.solution.doublesolution.DoubleSolution ;
 
 import uk.ac.york.wsdh500.moea.random.SecurePRNG ;
 
-public class SeedUtils
+public class SeedUtils implements SeedTypes
 {
-	/** types */
-	public static final int RANDOM		= 0 ;
-	public static final int LINEAR		= 1 ;
-	public static final int LOGARITHMIC	= 2 ;
-	public static final int TWISTED		= 4 ;
-	public static final int ORTHOGONAL	= 8 ;
-
 	/** from SBXCrossOver, EPS defines the minimum difference allowed between real values */
 	private static final double EPS = 1.0e-14 ;
 	/** The next value up from EPS *should* be the minimum required to get crossed over. */
@@ -183,7 +176,7 @@ public class SeedUtils
 		return sum ;
 	}
 
-	private static double map( double value , double istart , double istop , double ostart , double ostop )
+	public static double map( double value , double istart , double istop , double ostart , double ostop )
     {
             double i = istop - istart ;
             double j = 0 ;
