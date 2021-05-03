@@ -241,22 +241,18 @@ public class SeedExperiment implements SeedTypes , ExperimentPaths
 						algorithms.add( getTraceSPEA2( problem , i , RANDOM ) ) ;
 						algorithms.add( getTraceSPEA2( problem , i , LINEAR ) ) ;
 						algorithms.add( getTraceSPEA2( problem , i , LOGARITHMIC ) ) ;
-						/*
 						algorithms.add( getTraceSPEA2( problem , i , RANDOM | ORTHOGONAL ) ) ;
 						algorithms.add( getTraceSPEA2( problem , i , LINEAR | ORTHOGONAL ) ) ;
 						algorithms.add( getTraceSPEA2( problem , i , LOGARITHMIC | ORTHOGONAL ) ) ;
-						*/
 					}
 					else
 					{
 						algorithms.add( getSeededSPEA2( problem , i , RANDOM ) ) ;
 						algorithms.add( getSeededSPEA2( problem , i , LINEAR ) ) ;
 						algorithms.add( getSeededSPEA2( problem , i , LOGARITHMIC ) ) ;
-						/*
 						algorithms.add( getSeededSPEA2( problem , i , RANDOM | ORTHOGONAL ) ) ;
 						algorithms.add( getSeededSPEA2( problem , i , LINEAR | ORTHOGONAL ) ) ;
 						algorithms.add( getSeededSPEA2( problem , i , LOGARITHMIC | ORTHOGONAL ) ) ;
-						*/
 					}
 				}
 
