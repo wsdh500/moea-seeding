@@ -63,7 +63,6 @@ import uk.ac.york.wsdh500.moea.utils.SeedTypes ;
  */
 public class SeedExperiment implements SeedTypes , ExperimentPaths
 {
-	private static final int INDEPENDENT_RUNS	= 25 ;
 	private static final int CORES				= 6 ;
 
 	// algorithms
@@ -81,6 +80,13 @@ public class SeedExperiment implements SeedTypes , ExperimentPaths
 	private final static int DTLZ				= 8 ;
 	private final static int RE					= 16 ;
 
+	private final static int[] TREATMENTS		=
+	{
+		RANDOM ,
+		LINEAR ,
+		LOGARITHMIC
+	} ;
+
 	// configuration
 	private static int ALGORITHMS				= NSGAII | SPEA2 ;
 	private static int PROBLEMS					= DTLZ | LZ09 | RE | WFG | ZDT ;
@@ -89,7 +95,8 @@ public class SeedExperiment implements SeedTypes , ExperimentPaths
 	private static boolean SECURE				= false ;
 
 	private final static int POPULATION_SIZE	= 100 ;
-	private final static int ITERATIONS			= 250 ;
+	private final static int ITERATIONS			= 25 ;
+	private final static int INDEPENDENT_RUNS	= 250 ;
 
 //////////////////////////////////////////////////////////// MAIN
 
@@ -212,47 +219,23 @@ public class SeedExperiment implements SeedTypes , ExperimentPaths
 			{
 				if( ( ALGORITHMS & NSGAII ) == NSGAII )
 				{
-					if( TRACE )
+					for( int TREATMENT : TREATMENTS )
 					{
-						algorithms.add( getTraceNSGAII( problem , i , RANDOM ) ) ;
-						algorithms.add( getTraceNSGAII( problem , i , LINEAR ) ) ;
-						algorithms.add( getTraceNSGAII( problem , i , LOGARITHMIC ) ) ;
-
-						algorithms.add( getTraceNSGAII( problem , i , RANDOM | ORTHOGONAL ) ) ;
-						algorithms.add( getTraceNSGAII( problem , i , LINEAR | ORTHOGONAL ) ) ;
-						algorithms.add( getTraceNSGAII( problem , i , LOGARITHMIC | ORTHOGONAL ) ) ;
-					}
-					else
-					{
-						algorithms.add( getSeededNSGAII( problem , i , RANDOM ) ) ;
-						algorithms.add( getSeededNSGAII( problem , i , LINEAR ) ) ;
-						algorithms.add( getSeededNSGAII( problem , i , LOGARITHMIC ) ) ;
-
-						algorithms.add( getSeededNSGAII( problem , i , RANDOM | ORTHOGONAL ) ) ;
-						algorithms.add( getSeededNSGAII( problem , i , LINEAR | ORTHOGONAL ) ) ;
-						algorithms.add( getSeededNSGAII( problem , i , LOGARITHMIC | ORTHOGONAL ) ) ;
+						if( TRACE )
+							algorithms.add( getTraceNSGAII( problem , i , TREATMENT ) ) ;
+						else
+							algorithms.add( getSeededNSGAII( problem , i , TREATMENT ) ) ;
 					}
 				}
 
 				if( ( ALGORITHMS & SPEA2 ) == SPEA2 )
 				{
-					if( TRACE )
+					for( int TREATMENT : TREATMENTS )
 					{
-						algorithms.add( getTraceSPEA2( problem , i , RANDOM ) ) ;
-						algorithms.add( getTraceSPEA2( problem , i , LINEAR ) ) ;
-						algorithms.add( getTraceSPEA2( problem , i , LOGARITHMIC ) ) ;
-						algorithms.add( getTraceSPEA2( problem , i , RANDOM | ORTHOGONAL ) ) ;
-						algorithms.add( getTraceSPEA2( problem , i , LINEAR | ORTHOGONAL ) ) ;
-						algorithms.add( getTraceSPEA2( problem , i , LOGARITHMIC | ORTHOGONAL ) ) ;
-					}
-					else
-					{
-						algorithms.add( getSeededSPEA2( problem , i , RANDOM ) ) ;
-						algorithms.add( getSeededSPEA2( problem , i , LINEAR ) ) ;
-						algorithms.add( getSeededSPEA2( problem , i , LOGARITHMIC ) ) ;
-						algorithms.add( getSeededSPEA2( problem , i , RANDOM | ORTHOGONAL ) ) ;
-						algorithms.add( getSeededSPEA2( problem , i , LINEAR | ORTHOGONAL ) ) ;
-						algorithms.add( getSeededSPEA2( problem , i , LOGARITHMIC | ORTHOGONAL ) ) ;
+						if( TRACE )
+							algorithms.add( getTraceSPEA2( problem , i , TREATMENT ) ) ;
+						else
+							algorithms.add( getSeededSPEA2( problem , i , TREATMENT ) ) ;
 					}
 				}
 

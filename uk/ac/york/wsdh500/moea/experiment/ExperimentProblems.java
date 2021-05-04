@@ -127,6 +127,9 @@ public class ExperimentProblems
 		ExperimentProblem<DoubleSolution> problem ;
 		for( int i = 1 ; i <= 5 ; i++ )
 		{
+			if( i == 2 || i == 4 )
+				continue ;
+
 			problem = getProblem( "jmetal.problems.RE.RE2" + i ) ;
 			if( problem != null )
 			{

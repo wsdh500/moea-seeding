@@ -230,10 +230,9 @@ public class StatsUtils implements ExperimentPaths
 	public static void main( String[] args )
 	{	
 		if( CREATE_STATS )
-		{
 			create_stats( BASE_DIR ) ;
-		}
-		else if( CREATE_PROBLEMS )
+
+		if( CREATE_PROBLEMS )
 		{
 			List<ExperimentProblem<DoubleSolution>> problems = SeedExperiment.getProblems() ;
 			for( ExperimentProblem<DoubleSolution> problem : problems )
