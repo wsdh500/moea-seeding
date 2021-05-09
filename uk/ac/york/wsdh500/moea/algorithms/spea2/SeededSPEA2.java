@@ -58,6 +58,7 @@ public class SeededSPEA2 extends SPEA2<DoubleSolution>
 			switch( SEED_TYPE & 3 )
 			{
 				case RANDOM :
+					name += " + random" ;
 					break ;
 				case LINEAR :
 					name += " + linear" ;
