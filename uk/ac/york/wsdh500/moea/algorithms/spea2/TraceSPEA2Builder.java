@@ -36,7 +36,7 @@ public class TraceSPEA2Builder extends SeededSPEA2Builder
 				pareto_front , dump_fronts
 		) ;
 
-		algorithm.setSeedStrategy( SEED_TYPE ) ;
+		algorithm.setSeedStrategy( SEED_TYPES ) ;
 
 		return algorithm ;
 	}

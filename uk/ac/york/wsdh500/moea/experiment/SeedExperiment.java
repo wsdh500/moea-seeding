@@ -80,11 +80,12 @@ public class SeedExperiment implements SeedTypes , ExperimentPaths
 	private final static int DTLZ				= 8 ;
 	private final static int RE					= 16 ;
 
-	private final static int[] TREATMENTS		=
+	private final static int[][] TREATMENTS		=
 	{
-		RANDOM ,
-		LINEAR ,
-		LOGARITHMIC
+		{ RANDOM } ,
+		{ LINEAR } ,
+		{ LOGARITHMIC } ,
+		{ LOGARITHMIC , LINEAR } ,
 	} ;
 
 	// configuration
@@ -219,7 +220,7 @@ public class SeedExperiment implements SeedTypes , ExperimentPaths
 			{
 				if( ( ALGORITHMS & NSGAII ) == NSGAII )
 				{
-					for( int TREATMENT : TREATMENTS )
+					for( int[] TREATMENT : TREATMENTS )
 					{
 						if( TRACE )
 							algorithms.add( getTraceNSGAII( problem , i , TREATMENT ) ) ;
@@ -230,7 +231,7 @@ public class SeedExperiment implements SeedTypes , ExperimentPaths
 
 				if( ( ALGORITHMS & SPEA2 ) == SPEA2 )
 				{
-					for( int TREATMENT : TREATMENTS )
+					for( int[] TREATMENT : TREATMENTS )
 					{
 						if( TRACE )
 							algorithms.add( getTraceSPEA2( problem , i , TREATMENT ) ) ;
@@ -259,7 +260,7 @@ public class SeedExperiment implements SeedTypes , ExperimentPaths
 
 //////////////////////////////////////////////////////////// NSGAII
 
-	private static ExperimentAlgorithm<DoubleSolution,List<DoubleSolution>> getSeededNSGAII( ExperimentProblem<DoubleSolution> problem , int i  , int seed )
+	private static ExperimentAlgorithm<DoubleSolution,List<DoubleSolution>> getSeededNSGAII( ExperimentProblem<DoubleSolution> problem , int i  , int[] seed )
 	{
 		CrossoverOperator<DoubleSolution> crossover = getCrossoverOperator() ;
 
@@ -278,7 +279,7 @@ public class SeedExperiment implements SeedTypes , ExperimentPaths
 		return new ExperimentAlgorithm<DoubleSolution,List<DoubleSolution>>( algorithm , problem , i ) ;
 	}
 
-	private static ExperimentAlgorithm<DoubleSolution,List<DoubleSolution>> getTraceNSGAII( ExperimentProblem<DoubleSolution> problem , int i  , int seed )
+	private static ExperimentAlgorithm<DoubleSolution,List<DoubleSolution>> getTraceNSGAII( ExperimentProblem<DoubleSolution> problem , int i  , int[] seed )
 	{
 		CrossoverOperator<DoubleSolution> crossover = getCrossoverOperator() ;
 
@@ -299,7 +300,7 @@ public class SeedExperiment implements SeedTypes , ExperimentPaths
 
 //////////////////////////////////////////////////////////// SPEA2
 
-	private static ExperimentAlgorithm<DoubleSolution,List<DoubleSolution>> getSeededSPEA2( ExperimentProblem<DoubleSolution> problem , int i , int seed )
+	private static ExperimentAlgorithm<DoubleSolution,List<DoubleSolution>> getSeededSPEA2( ExperimentProblem<DoubleSolution> problem , int i , int[] seed )
 	{
 		CrossoverOperator<DoubleSolution> crossover = getCrossoverOperator() ;
 
@@ -320,7 +321,7 @@ public class SeedExperiment implements SeedTypes , ExperimentPaths
 		return new ExperimentAlgorithm<DoubleSolution,List<DoubleSolution>>( algorithm , problem , i ) ;
 	}
 
-	private static ExperimentAlgorithm<DoubleSolution,List<DoubleSolution>> getTraceSPEA2( ExperimentProblem<DoubleSolution> problem , int i , int seed )
+	private static ExperimentAlgorithm<DoubleSolution,List<DoubleSolution>> getTraceSPEA2( ExperimentProblem<DoubleSolution> problem , int i , int[] seed )
 	{
 		CrossoverOperator<DoubleSolution> crossover = SeedExperiment.getCrossoverOperator() ;
 

@@ -8,7 +8,7 @@ import org.uma.jmetal.solution.doublesolution.DoubleSolution ;
 
 public class SeededSPEA2Builder extends SPEA2Builder<DoubleSolution>
 {
-	protected int SEED_TYPE = -1 ;
+	protected int[] SEED_TYPES ;
 
 	public SeededSPEA2Builder( Problem<DoubleSolution> problem , CrossoverOperator<DoubleSolution> crossoverOperator , MutationOperator<DoubleSolution> mutationOperator )
 	{
@@ -27,14 +27,14 @@ public class SeededSPEA2Builder extends SPEA2Builder<DoubleSolution>
 				getSolutionListEvaluator() , k
 		) ;
 
-		algorithm.setSeedStrategy( SEED_TYPE ) ;
+		algorithm.setSeedStrategy( SEED_TYPES ) ;
 
 		return algorithm ;
 	}
 
-	public SeededSPEA2Builder setSeedStrategy( int type )
+	public SeededSPEA2Builder setSeedStrategy( int[] types )
 	{
-		SEED_TYPE  = type ;
+		SEED_TYPES = types ;
 
 		return this ;
 	}

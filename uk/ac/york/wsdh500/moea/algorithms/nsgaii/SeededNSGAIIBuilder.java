@@ -14,7 +14,7 @@ public class SeededNSGAIIBuilder extends NSGAIIBuilder<DoubleSolution>
 {
 	private Comparator<DoubleSolution> dominanceComparator ;
 
-	protected int SEED_TYPE = -1 ;
+	protected int[] SEED_TYPES ;
 
 	public SeededNSGAIIBuilder( Problem<DoubleSolution> problem , CrossoverOperator<DoubleSolution> crossoverOperator , MutationOperator<DoubleSolution> mutationOperator , int populationSize )
 	{
@@ -33,7 +33,7 @@ public class SeededNSGAIIBuilder extends NSGAIIBuilder<DoubleSolution>
 				dominanceComparator != null ? dominanceComparator : new DominanceComparator<>() , getSolutionListEvaluator()
 		) ;
 
-		algorithm.setSeedStrategy( SEED_TYPE ) ;
+		algorithm.setSeedStrategy( SEED_TYPES ) ;
 
 		return algorithm ;
 	}
@@ -44,9 +44,9 @@ public class SeededNSGAIIBuilder extends NSGAIIBuilder<DoubleSolution>
 		return setDominanceComparator( dominanceComparator ) ;
 	}
 
-	public SeededNSGAIIBuilder setSeedStrategy( int type )
+	public SeededNSGAIIBuilder setSeedStrategy( int[] types )
 	{
-		SEED_TYPE = type ;
+		SEED_TYPES = types ;
 
 		return this ;
 	}

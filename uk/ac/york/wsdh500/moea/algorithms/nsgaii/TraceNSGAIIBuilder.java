@@ -40,7 +40,7 @@ public class TraceNSGAIIBuilder extends SeededNSGAIIBuilder
 				pareto_front , dump_fronts
 		) ;
 
-		algorithm.setSeedStrategy( SEED_TYPE ) ;
+		algorithm.setSeedStrategy( SEED_TYPES ) ;
 
 		return algorithm ;
 	}
