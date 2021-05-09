@@ -6,6 +6,7 @@ import static uk.ac.york.wsdh500.moea.utils.SeedUtils.ORTHOGONAL ;
 import static uk.ac.york.wsdh500.moea.utils.SeedUtils.RANDOM ;
 import static uk.ac.york.wsdh500.moea.utils.SeedUtils.TWISTED ;
 
+import java.util.ArrayList ;
 import java.util.Comparator ;
 import java.util.List ;
 
@@ -23,7 +24,7 @@ public class SeededNSGAIIMeasures extends NSGAIIMeasures<DoubleSolution>
 {
 	private static final long serialVersionUID = -4334447327011803270L ;
 
-	private int SEED_TYPE = -1 ;
+	private int[] SEED_TYPES ;
 
 	public static final String CURRENT_EXECUTION_TIME = "currentExecutionTime" ; 
 	public static final String CURRENT_EVALUATION = "currentEvaluation" ;
@@ -48,10 +49,10 @@ public class SeededNSGAIIMeasures extends NSGAIIMeasures<DoubleSolution>
 		) ;
 	}
 
-	protected void setSeedStrategy( int type )
+	protected void setSeedStrategy( int[] types )
 	{
-		if( SEED_TYPE == -1 )
-			SEED_TYPE = type ;
+		if( SEED_TYPES == null )
+			SEED_TYPES = types ;
 	}
 
 	@Override
@@ -59,23 +60,27 @@ public class SeededNSGAIIMeasures extends NSGAIIMeasures<DoubleSolution>
 	{
 		String name = "NSGAII" ;
 
-		switch( SEED_TYPE & 3 )
+		for( int SEED_TYPE : SEED_TYPES )
 		{
-			case RANDOM :
-				break ;
-			case LINEAR :
-				name += " + linear" ;
-				break ;
-			case LOGARITHMIC :
-				name += " + log" ;
-				break ;
+			switch( SEED_TYPE & 3 )
+			{
+				case RANDOM :
+					name += " + random" ;
+					break ;
+				case LINEAR :
+					name += " + linear" ;
+					break ;
+				case LOGARITHMIC :
+					name += " + log" ;
+					break ;
+			}
+
+			if( ( SEED_TYPE & TWISTED ) == TWISTED )
+				name += " + twist" ;
+
+			if( ( SEED_TYPE & ORTHOGONAL ) == ORTHOGONAL )
+				name += " + orthogonal" ;
 		}
-
-		if( ( SEED_TYPE & TWISTED ) == TWISTED )
-			name += " + twist" ;
-
-		if( ( SEED_TYPE & ORTHOGONAL ) == ORTHOGONAL )
-			name += " + orthogonal" ; ;
 
 		return name ;
 	}
@@ -83,6 +88,10 @@ public class SeededNSGAIIMeasures extends NSGAIIMeasures<DoubleSolution>
 	@Override
 	protected List<DoubleSolution> createInitialPopulation()
 	{
-		return SeedUtils.createPopulation( getProblem() , getMaxPopulationSize() , SEED_TYPE ) ;
+		List<DoubleSolution> population = new ArrayList<DoubleSolution>() ;
+		for( int SEED_TYPE : SEED_TYPES )
+			population.addAll( SeedUtils.createPopulation( getProblem() , getMaxPopulationSize() , SEED_TYPE ) ) ;
+
+		return population ;
 	}
 }
