@@ -1,20 +1,21 @@
-package uk.ac.york.wsdh500.moea.problems ;
+package uk.ac.york.wsdh500.moea.problems.zdt ;
 
-import org.uma.jmetal.problem.multiobjective.zdt.ZDT4 ;
+import org.uma.jmetal.problem.multiobjective.zdt.ZDT2 ;
 import org.uma.jmetal.solution.doublesolution.DoubleSolution ;
 
+import uk.ac.york.wsdh500.moea.problems.ParetoSet ;
 import uk.ac.york.wsdh500.moea.utils.ParetoUtils ;
 
-public class ParetoZDT4 extends ZDT4 implements ParetoSet
+public class ParetoZDT2 extends ZDT2 implements ParetoSet
 {
 	private static final long serialVersionUID = 3990455469988084970L ;
 
-	public ParetoZDT4()
+	public ParetoZDT2()
 	{
-		this( 10 ) ;
+		this( 30 ) ;
 	}
 
-	public ParetoZDT4( Integer numberOfVariables )
+	public ParetoZDT2( Integer numberOfVariables )
 	{
 		super( numberOfVariables ) ;
 		setName( super.getName() ) ;
@@ -38,7 +39,7 @@ public class ParetoZDT4 extends ZDT4 implements ParetoSet
 	@Override
 	public double function( double f1 )
 	{
-		// https://sop.tik.ee.ethz.ch/download/supplementary/testproblems/zdt4/
-		return 1 - Math.sqrt( f1 ) ;
+		// https://sop.tik.ee.ethz.ch/download/supplementary/testproblems/zdt2/
+		return 1 - Math.pow( f1 , 2 ) ;
 	}
 }

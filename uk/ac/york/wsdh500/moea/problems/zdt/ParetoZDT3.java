@@ -1,8 +1,9 @@
-package uk.ac.york.wsdh500.moea.problems ;
+package uk.ac.york.wsdh500.moea.problems.zdt ;
 
 import org.uma.jmetal.problem.multiobjective.zdt.ZDT3 ;
 import org.uma.jmetal.solution.doublesolution.DoubleSolution ;
 
+import uk.ac.york.wsdh500.moea.problems.ParetoSet ;
 import uk.ac.york.wsdh500.moea.utils.ParetoUtils ;
 
 public class ParetoZDT3 extends ZDT3 implements ParetoSet
