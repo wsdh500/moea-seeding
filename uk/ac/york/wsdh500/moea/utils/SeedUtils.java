@@ -120,10 +120,9 @@ public class SeedUtils implements SeedTypes
 		int n = w.length ;			// population size
 		int m = w[ 0 ].length ;		// number of variables
 
-		int steps = n / m ;
-
+		SecurePRNG random = new SecurePRNG() ;
 		for( int i = 1 ; i < m ; i++ )
-			twist_variable( w , i , i * steps ) ;
+			twist_variable( w , i , random.nextInt( 0 , n ) ) ;
 	}
 
 	public static void twist_variable( double[][] w , int column , int steps )
