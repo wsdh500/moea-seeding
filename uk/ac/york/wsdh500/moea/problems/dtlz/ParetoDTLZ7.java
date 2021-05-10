@@ -1,9 +1,10 @@
-package uk.ac.york.wsdh500.moea.problems ;
+package uk.ac.york.wsdh500.moea.problems.dtlz ;
 
 import org.uma.jmetal.problem.multiobjective.dtlz.DTLZ7 ;
 import org.uma.jmetal.solution.doublesolution.DoubleSolution ;
 import org.uma.jmetal.util.JMetalException ;
 
+import uk.ac.york.wsdh500.moea.problems.ParetoSet ;
 import uk.ac.york.wsdh500.moea.utils.ParetoUtils ;
 
 public class ParetoDTLZ7 extends DTLZ7 implements ParetoSet

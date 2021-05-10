@@ -1,22 +1,23 @@
-package uk.ac.york.wsdh500.moea.problems ;
+package uk.ac.york.wsdh500.moea.problems.dtlz ;
 
-import org.uma.jmetal.problem.multiobjective.dtlz.DTLZ5 ;
+import org.uma.jmetal.problem.multiobjective.dtlz.DTLZ2 ;
 import org.uma.jmetal.solution.doublesolution.DoubleSolution ;
 import org.uma.jmetal.util.JMetalException ;
 
+import uk.ac.york.wsdh500.moea.problems.ParetoSet ;
 import uk.ac.york.wsdh500.moea.utils.ParetoUtils ;
 
-public class ParetoDTLZ5 extends DTLZ5 implements ParetoSet
+public class ParetoDTLZ2 extends DTLZ2 implements ParetoSet
 {
 	private static final long serialVersionUID = 2024315002961667813L ;
 
-	public ParetoDTLZ5()
+	public ParetoDTLZ2()
 	{
 		this( 12 , 2 ) ;
 		setName( super.getName() ) ;
 	}
 
-	public ParetoDTLZ5( Integer numberOfVariables , Integer numberOfObjectives ) throws JMetalException
+	public ParetoDTLZ2( Integer numberOfVariables , Integer numberOfObjectives ) throws JMetalException
 	{
 		super( numberOfVariables , numberOfObjectives ) ;
 	}
@@ -39,6 +40,7 @@ public class ParetoDTLZ5 extends DTLZ5 implements ParetoSet
 	@Override
 	public double function( double f1 )
 	{
+		// https://sop.tik.ee.ethz.ch/download/supplementary/testproblems/dtlz2/
 		return Math.sqrt( 1 - Math.pow( f1 , 2 ) ) ;
 	}
 }
